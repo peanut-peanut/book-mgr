@@ -1,0 +1,45 @@
+.auth{
+    .bg{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;//设置图片上下左右撑满
+        background-image: url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.1ppt.com%2Fuploads%2Fallimg%2F2011%2F1_201118081656_2.JPG&refer=http%3A%2F%2Fimg.1ppt.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1650459066&t=2c71c69d0f5ef23c607f8cba66fd8517);
+        background-repeat: no-repeat;//设置图片不因尺寸铺不满而重复
+        background-position: center center;//上下左右居中
+        background-size: cover;//自适应屏幕
+        z-index: -999;//堆叠顺序
+    }
+    .title-info{
+       margin-top: 100px; 
+       text-align: center;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       margin-bottom: 30px;
+
+
+       img{
+           width: 60px;
+           height: 60px;
+       }
+       h2{
+           margin: 0px;
+           margin-left: 20px;
+       }
+    }
+
+    .form{
+        width: 400px;
+        margin: 0 auto;
+    }
+    
+    .item{
+        margin-bottom: 15px;
+        button{
+            width: 100%;
+        }
+    }
+
+}
