@@ -1,0 +1,18 @@
+{
+  "name": "book_mgr_be",
+  "version": "1.0.0",
+  "description": "图书管理系统服务端",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "book_mgr_be"
+  ],
+  "author": "wangchenxu",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.13.4",
+    "mongoose": "^6.7.2"
+  }
+}
