@@ -1,0 +1,43 @@
+.bg {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0.4;
+	background-image: url("https://cdn.pixabay.com/photo/2016/12/30/19/33/children-1941336_1280.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+.content {
+	.title-info {
+		width: 300px;
+		margin: 0 auto;
+		text-align: center;
+		margin-top: 150px;
+		margin-bottom: 30px;
+		display: flex;
+		align-items: center;
+
+		img {
+			width: 70px;
+			height: 70px;
+		}
+		h2 {
+			margin: 0;
+			margin-left: 30px;
+		}
+	}
+	.form {
+		width: 300px;
+		margin: 0 auto;
+		.item {
+			margin-bottom: 16px;
+			button {
+				width: 100%;
+			}
+		}
+	}
+}
