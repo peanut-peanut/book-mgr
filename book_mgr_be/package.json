@@ -4,7 +4,8 @@
   "description": "图书管理系统服务端",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "book_mgr_be"
@@ -12,7 +13,13 @@
   "author": "wangchenxu",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "@koa/router": "^12.0.0",
     "koa": "^2.13.4",
+    "koa-body": "^6.0.1",
     "mongoose": "^6.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
