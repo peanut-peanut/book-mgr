@@ -26,3 +26,5 @@ export const result = (response, showErrMsg = true) => {
 
   };
 };
+
+export const deepClone = (obj) => JSON.parse(JSON.stringify(obj));

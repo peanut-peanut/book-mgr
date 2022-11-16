@@ -5,4 +5,4 @@ const InviteCodeSchema = new mongoose.Schema({
 	code: String,
 	user: String,
 })
-mongoose.model('InviteCode',InviteCodeSchema)
+mongoose.model('InviteCode', InviteCodeSchema);
