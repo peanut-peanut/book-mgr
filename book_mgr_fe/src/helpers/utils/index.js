@@ -28,3 +28,14 @@ export const result = (response, showErrMsg = true) => {
 };
 
 export const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
+
+export const formatTimeDate = (time) => {
+  const date = new Date(Number(time));
+  const YYYY = date.getFullYear();
+  const MM = date.getMonth();
+  const DD = date.getDate();
+  const hh = date.getHours();
+  const mm = date.getMinutes();
+  const ss = date.getSeconds();
+  return `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`;
+};

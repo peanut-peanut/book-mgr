@@ -32,10 +32,30 @@ router.post('/add', async (ctx) => {
 })
 // 书籍表格接口
 router.get('/list', async (ctx) => {
-	const list = await Book.find().exec();
+	let {
+		page = 1,
+		size = 5,
+		keyword = '',
+	} = ctx.query;
+	page = Number(page);
+	size = Number(size);
+	const query = {};
+	if (keyword) {
+		query.name = keyword;
+	}
+	const list = await Book.find(query)
+		.skip((page - 1) * size)
+		.limit(size)
+		.exec();
+	const total = await Book.countDocuments();
 	ctx.body = {
 		code: 1,
-		data: list,
+		data: {
+			list,
+			total,
+			page,
+			size,
+		},
 		msg: '获取列表成功',
 	}
 })
