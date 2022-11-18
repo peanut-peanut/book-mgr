@@ -19,6 +19,9 @@
 			<a-form-item label="作者">
 				<a-input v-model:value="addForm.author" />
 			</a-form-item>
+			<a-form-item label="库存">
+				<a-input-number v-model:value="addForm.count" :min="0" :max="999999" />
+			</a-form-item>
 			<a-form-item label="出版日期">
 				<a-date-picker v-model:value="addForm.publishDate" />
 			</a-form-item>

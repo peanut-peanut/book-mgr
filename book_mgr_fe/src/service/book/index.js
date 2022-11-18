@@ -9,3 +9,7 @@ export const list = (data) => axios.get(
     params: data,
   },
 );
+// 删除书籍
+export const remove = (id) => axios.delete(`http://localhost:3000/book/delete/${id}`);
+// 出入库书籍
+export const updateCount = (form) => axios.post('http://localhost:3000/book/update/count', form);

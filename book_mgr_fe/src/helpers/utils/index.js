@@ -32,7 +32,7 @@ export const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
 export const formatTimeDate = (time) => {
   const date = new Date(Number(time));
   const YYYY = date.getFullYear();
-  const MM = date.getMonth();
+  const MM = date.getMonth() + 1;
   const DD = date.getDate();
   const hh = date.getHours();
   const mm = date.getMinutes();

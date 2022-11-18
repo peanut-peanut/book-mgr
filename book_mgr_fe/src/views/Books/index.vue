@@ -21,8 +21,16 @@
 			:data-source="list"
 			:pagination="false">
 				<template #bodyCell="{column, record}">
+					<template v-if="column.dataIndex === 'count'">
+						<a href="javascript:;" @click="updateCount(1,record)">入库</a>
+						{{record.count}}
+						<a href="javascript:;" @click="updateCount(2,record)">出库</a>
+					</template>
 					<template v-if="column.dataIndex === 'publishDate'">
 						{{formatTimeDate(record.publishDate)}}
+					</template>
+					<template v-if="column.dataIndex === 'option'">
+						<a href="javascript:;" @click="remove(record)">删除</a>
 					</template>
 				</template>
 			</a-table>
@@ -39,7 +47,7 @@
 	</div>
 </template>
 
-<script src="./index.js"></script>
+<script src="./index.jsx"></script>
 
 <style lang="scss" scoped>
 	@import './index.scss';

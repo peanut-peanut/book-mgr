@@ -1,6 +1,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { book } from '@/service';
 import { result, formatTimeDate } from '@/helpers/utils';
+import { message, Modal, Input } from 'ant-design-vue';
 import AddOne from './AddOne/index.vue';
 
 export default defineComponent({
@@ -24,12 +25,20 @@ export default defineComponent({
         dataIndex: 'price',
       },
       {
+        title: '库存',
+        dataIndex: 'count',
+      },
+      {
         title: '出版日期',
         dataIndex: 'publishDate',
       },
       {
         title: '分类',
         dataIndex: 'classify',
+      },
+      {
+        title: '操作',
+        dataIndex: 'option',
       },
     ];
 
@@ -58,15 +67,57 @@ export default defineComponent({
     };
     // 搜索方法
     const onSearch = async () => {
+      curPage.value = 1;
       getList();
-      status.value = true;
+      status.value = Boolean(keyword.value);
     };
-    // 清空搜索框方法
+    // 清空搜索框 回显所有数据
     const clear = () => {
       keyword.value = '';
       status.value = false;
       getList();
     };
+    // 删除操作
+    const remove = async (record) => {
+      const { _id } = record;
+      const res = await book.remove(_id);
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg);
+          getList();
+        });
+    };
+    // 出入库弹框
+    const updateCount = async (type, record) => {
+      let optionMsg = '增加';
+      if (type === '2') {
+        optionMsg = '减少';
+      }
+      Modal.confirm({
+        title: `${optionMsg}的数量`,
+        okText: '确认',
+        cancelText: '取消',
+        content: (
+					<div>
+						<Input class="_book_input_count" />
+					</div>
+        ),
+        onOk: async () => {
+          const el = document.querySelector('._book_input_count');
+          const res = await book.updateCount({
+            id: record._id,
+            num: el.value,
+            type,
+          });
+          result(res)
+            .success(({ msg }) => {
+              message.success(msg);
+              getList();
+            });
+        },
+      });
+    };
+
     onMounted(async () => {
       getList();
     });
@@ -81,6 +132,8 @@ export default defineComponent({
       setPage,
       onSearch,
       clear,
+      remove,
+      updateCount,
     };
   },
 });

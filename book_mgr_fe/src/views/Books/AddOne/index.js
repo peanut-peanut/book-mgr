@@ -9,6 +9,7 @@ const defaultForm = {
   author: '',
   publishDate: 0,
   classify: '',
+  count: 0,
 };
 
 export default defineComponent({

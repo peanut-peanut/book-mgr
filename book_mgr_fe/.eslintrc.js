@@ -16,5 +16,8 @@ module.exports = {
     'generator-star-spacing': 'off',
     'import/prefer-default-export': 'off',
     'no-unused-vars': 'off',
+    'vue/multi-word-component-names': 'off',
+    'no-tabs': 'off',
+    'no-underscore-dangle': 'off',
   },
 };
