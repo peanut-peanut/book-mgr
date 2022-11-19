@@ -30,6 +30,7 @@
 						{{formatTimeDate(record.publishDate)}}
 					</template>
 					<template v-if="column.dataIndex === 'option'">
+						<a href="javascript:;" @click="update(record)">编辑</a>
 						<a href="javascript:;" @click="remove(record)">删除</a>
 					</template>
 				</template>
@@ -44,6 +45,7 @@
 			</space-between>
 		</a-card>
 		<add-one v-model:show="show"/>
+		<update v-model:show="showUpdateModal" :book="currentBook" @update="updateCurBook" />
 	</div>
 </template>
 

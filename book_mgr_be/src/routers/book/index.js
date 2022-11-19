@@ -12,7 +12,7 @@ const router = new Router({
 	prefix: '/book',
 });
 const Book = mongoose.model('Book');
-// 添加图书接口
+// 添加书籍接口
 router.post('/add', async (ctx) => {
 	const {
 		name,
@@ -124,5 +124,39 @@ router.post('/update/count', async(ctx) => {
 		data: res,
 	}
 })
-
+// 修改书籍接口
+router.post('/update', async (ctx) => {
+	const {
+		id,
+		...others
+	} = ctx.request.body;
+	const one = await Book.findOne({
+		_id: id,
+	})
+	// 找不到书籍
+	if (!one) {
+		ctx.body = {
+			code: 0,
+			msg: '未找到书籍',
+			data: null,
+		}
+		return;
+	}
+	const newQuery = {};
+	// 过滤others中空的值
+	Object.entries(others).forEach(([key,value]) => {
+		if (value) {
+			newQuery[key] = value;
+		}
+	});
+	// 合并
+	Object.assign(one, newQuery);
+	// 存入数据库
+	const res = await one.save();
+	ctx.body = {
+		code: 1,
+		msg: '修改成功',
+		data: res,
+	}
+})
 module.exports = router;

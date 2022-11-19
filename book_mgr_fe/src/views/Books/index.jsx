@@ -3,14 +3,19 @@ import { book } from '@/service';
 import { result, formatTimeDate } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 import AddOne from './AddOne/index.vue';
+import Update from './Update/index.vue';
 
 export default defineComponent({
   components: {
     AddOne,
+    Update,
   },
   setup() {
     // add-one组件默认不显示
     const show = ref(false);
+    // update组件默认不显示
+    const showUpdateModal = ref(false);
+    // 表格每列信息
     const columns = [
       {
         title: '书名',
@@ -41,12 +46,12 @@ export default defineComponent({
         dataIndex: 'option',
       },
     ];
-
     const list = ref([]); // list -> 表格渲染
     const curPage = ref(1); // curPage -> 当前页
     const total = ref(0); // total -> 全部数据条数
     const keyword = ref(''); // keyword -> 搜索关键词
     const status = ref(false); // status -> 搜索状态
+    const currentBook = ref({}); // currentBook -> 点击编辑时书的信息
     // 分页方法
     const getList = async () => {
       const res = await book.list({
@@ -79,13 +84,21 @@ export default defineComponent({
     };
     // 删除操作
     const remove = async (record) => {
-      const { _id } = record;
-      const res = await book.remove(_id);
-      result(res)
-        .success(({ msg }) => {
-          message.success(msg);
-          getList();
-        });
+      Modal.confirm({
+        title: '确定要删除此行数据吗?',
+        okText: '确定',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk: async () => {
+          const { _id } = record;
+          const res = await book.remove(_id);
+          result(res)
+            .success(({ msg }) => {
+              message.success(msg);
+              getList();
+            });
+        },
+      });
     };
     // 出入库弹框
     const updateCount = async (type, record) => {
@@ -117,7 +130,15 @@ export default defineComponent({
         },
       });
     };
-
+    // 编辑修改书籍
+    const update = (record) => {
+      showUpdateModal.value = true;
+      currentBook.value = record;
+    };
+    // 更新修改后的书籍信息
+    const updateCurBook = (newData) => {
+      Object.assign(currentBook.value, newData);
+    };
     onMounted(async () => {
       getList();
     });
@@ -128,12 +149,16 @@ export default defineComponent({
       show,
       keyword,
       status,
+      showUpdateModal,
+      currentBook,
       formatTimeDate,
       setPage,
       onSearch,
       clear,
       remove,
       updateCount,
+      update,
+      updateCurBook,
     };
   },
 });
