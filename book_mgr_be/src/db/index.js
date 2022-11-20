@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 require('./Schemas/User');
 require('./Schemas/InviteCode');
 require('./Schemas/Book');
+require('./Schemas/InventoryLog');
+
 const connect = () => { 
   return new Promise((resolve) => {
     // 连接数据库

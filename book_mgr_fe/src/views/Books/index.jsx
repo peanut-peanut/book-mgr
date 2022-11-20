@@ -1,5 +1,6 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { book } from '@/service';
+import { useRouter } from 'vue-router';
 import { result, formatTimeDate } from '@/helpers/utils';
 import { message, Modal, Input } from 'ant-design-vue';
 import AddOne from './AddOne/index.vue';
@@ -11,6 +12,7 @@ export default defineComponent({
     Update,
   },
   setup() {
+    const router = useRouter();
     // add-one组件默认不显示
     const show = ref(false);
     // update组件默认不显示
@@ -20,30 +22,37 @@ export default defineComponent({
       {
         title: '书名',
         dataIndex: 'name',
+        align: 'center',
       },
       {
         title: '作者',
         dataIndex: 'author',
+        align: 'center',
       },
       {
         title: '价格',
         dataIndex: 'price',
+        align: 'center',
       },
       {
         title: '库存',
         dataIndex: 'count',
+        align: 'center',
       },
       {
         title: '出版日期',
         dataIndex: 'publishDate',
+        align: 'center',
       },
       {
         title: '分类',
         dataIndex: 'classify',
+        align: 'center',
       },
       {
         title: '操作',
         dataIndex: 'option',
+        align: 'center',
       },
     ];
     const list = ref([]); // list -> 表格渲染
@@ -71,7 +80,7 @@ export default defineComponent({
       getList();
     };
     // 搜索方法
-    const onSearch = async () => {
+    const onSearch = () => {
       curPage.value = 1;
       getList();
       status.value = Boolean(keyword.value);
@@ -135,9 +144,17 @@ export default defineComponent({
       showUpdateModal.value = true;
       currentBook.value = record;
     };
-    // 更新修改后的书籍信息
+    // 更新修改后的某一行书籍信息
     const updateCurBook = (newData) => {
       Object.assign(currentBook.value, newData);
+    };
+    // 书籍详情页
+    const detail = (record) => {
+      router.push(`/books/${record._id}`);
+    };
+    // 添加书籍页面更新数据
+    const updateAddBook = () => {
+      getList();
     };
     onMounted(async () => {
       getList();
@@ -149,6 +166,7 @@ export default defineComponent({
       show,
       keyword,
       status,
+      curPage,
       showUpdateModal,
       currentBook,
       formatTimeDate,
@@ -159,6 +177,8 @@ export default defineComponent({
       updateCount,
       update,
       updateCurBook,
+      detail,
+      updateAddBook,
     };
   },
 });

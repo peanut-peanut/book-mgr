@@ -31,7 +31,9 @@ export default defineComponent({
         .success((data) => {
           // 初始化表单
           Object.assign(addForm, defaultForm);
+          context.emit('updateAddBook');
           message.success(data.msg);
+          context.emit('update:show', false);
         });
     };
     // 弹框取消

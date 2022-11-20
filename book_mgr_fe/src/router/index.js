@@ -16,6 +16,11 @@ const routes = [
         name: 'Books',
         component: () => import(/* webpackChunkName: "auth" */ '../views/Books/index.vue'),
       },
+      {
+        path: 'books/:id',
+        name: 'BookDetail',
+        component: () => import(/* webpackChunkName: "auth" */ '../views/Books/BookDetail/index.vue'),
+      },
     ],
   },
 ];

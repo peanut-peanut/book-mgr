@@ -19,5 +19,6 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'no-tabs': 'off',
     'no-underscore-dangle': 'off',
+    'no-param-reassign': 0,
   },
 };

@@ -15,3 +15,5 @@ export const remove = (id) => axios.delete(`http://localhost:3000/book/delete/${
 export const updateCount = (form) => axios.post('http://localhost:3000/book/update/count', form);
 // 编辑修改书籍
 export const update = (form) => axios.post('http://localhost:3000/book/update', form);
+// 书籍详情页
+export const detail = (id) => axios.get(`http://localhost:3000/book/detail/${id}`);

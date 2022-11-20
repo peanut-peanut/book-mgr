@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const { getMeta, preSave } = require('../../helpers/utils/index');
 
 const BookSchema = new mongoose.Schema({
 	// 书名
@@ -14,5 +14,7 @@ const BookSchema = new mongoose.Schema({
 	classify: String,
 	// 库存
 	count: Number,
+	meta: getMeta(),
 })
+BookSchema.pre('save', preSave);
 mongoose.model('Book', BookSchema);

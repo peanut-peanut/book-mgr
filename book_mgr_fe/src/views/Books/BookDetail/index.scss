@@ -1,0 +1,27 @@
+.item-info {
+	.items {
+		display: flex;
+		margin-bottom: 20px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+		.item {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			min-width: 70px;
+			.title {
+				font-weight: 500;
+				font-size: 18px;
+				color: rgba($color: #000000, $alpha: 0.7);
+			}
+			.content {
+				margin-left: 20px;
+				font-size: 18px;
+			}
+		}
+	}
+}
+.log-info {
+	margin-top: 50px;
+}

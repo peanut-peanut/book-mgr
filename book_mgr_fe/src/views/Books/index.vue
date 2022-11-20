@@ -17,6 +17,7 @@
 			</space-between>
 			<a-divider />
 			<a-table
+			bordered
 			:columns="columns"
 			:data-source="list"
 			:pagination="false">
@@ -30,7 +31,8 @@
 						{{formatTimeDate(record.publishDate)}}
 					</template>
 					<template v-if="column.dataIndex === 'option'">
-						<a href="javascript:;" @click="update(record)">编辑</a>
+						<a href="javascript:;" @click="detail(record)">详情&emsp;</a>
+						<a href="javascript:;" @click="update(record)">编辑&emsp;</a>
 						<a href="javascript:;" @click="remove(record)">删除</a>
 					</template>
 				</template>
@@ -44,7 +46,7 @@
 				@change="setPage"/>
 			</space-between>
 		</a-card>
-		<add-one v-model:show="show"/>
+		<add-one v-model:show="show" @updateAddBook="updateAddBook"/>
 		<update v-model:show="showUpdateModal" :book="currentBook" @update="updateCurBook" />
 	</div>
 </template>
