@@ -70,7 +70,6 @@ export default defineComponent({
         .success(({ data: { list, total } }) => {
           log.value = list;
           totalLog.value = total;
-          console.log(list);
         });
     };
     // 切换页码

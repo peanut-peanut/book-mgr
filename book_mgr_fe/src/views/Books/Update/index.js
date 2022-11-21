@@ -43,7 +43,6 @@ export default defineComponent({
     watch(() => props.book, (current) => {
       Object.assign(editForm, current);
       editForm.publishDate = moment(Number(editForm.publishDate));
-      console.log(editForm.publishDate);
     });
     return {
       props,

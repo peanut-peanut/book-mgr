@@ -69,13 +69,13 @@ router.get('/list', async (ctx) => {
 	const total = await Book.countDocuments();
 	ctx.body = {
 		code: 1,
+		msg: '获取列表成功',
 		data: {
 			list,
 			total,
 			page,
 			size,
 		},
-		msg: '获取列表成功',
 	}
 })
 // 删除书籍接口
