@@ -1,18 +1,29 @@
-import { defineComponent, onMounted, ref } from 'vue';
-import { user } from '@/service';
+import {
+  defineComponent, onMounted, reactive, ref,
+} from 'vue';
+import { user, character } from '@/service';
 import { message, Modal } from 'ant-design-vue';
 import { result, formatFullTimeDate } from '@/helpers/utils';
+import { getCharacterInfoById } from '@/helpers/character';
+import { EditOutlined } from '@ant-design/icons-vue';
+import store from '@/store';
 import AddOne from './AddOne/index.vue';
 
 export default defineComponent({
   components: {
     AddOne,
+    EditOutlined,
   },
   setup() {
     const columns = [
       {
         title: '账户',
         dataIndex: 'account',
+        align: 'center',
+      },
+      {
+        title: '角色',
+        dataIndex: 'character',
         align: 'center',
       },
       {
@@ -37,6 +48,12 @@ export default defineComponent({
     const show = ref(false);
     const keyword = ref('');
     const status = ref(false);
+    const { characterInfo } = store.state;
+    const showUpdateCharacterModal = ref(false);
+    const updateForm = reactive({
+      character: '',
+      userId: '',
+    });
     // 获取用户列表
     const getUserList = async () => {
       const res = await user.list(curUserPage.value, 5, keyword.value);
@@ -97,6 +114,25 @@ export default defineComponent({
       status.value = false;
       getUserList();
     };
+    // 编辑角色
+    const edit = (record) => {
+      updateForm.character = record.character;
+      updateForm.userId = record._id;
+      showUpdateCharacterModal.value = true;
+    };
+    // 修改角色提交
+    const submit = async () => {
+      const res = await character.update(updateForm);
+      result(res)
+        .success(({ msg }) => {
+          message.success(msg);
+          showUpdateCharacterModal.value = false;
+          getUserList();
+        });
+    };
+    const close = () => {
+      showUpdateCharacterModal.value = false;
+    };
     onMounted(() => {
       getUserList();
     });
@@ -108,6 +144,10 @@ export default defineComponent({
       show,
       keyword,
       status,
+      EditOutlined,
+      showUpdateCharacterModal,
+      updateForm,
+      characterInfo,
       formatFullTimeDate,
       getUserList,
       setPage,
@@ -116,6 +156,10 @@ export default defineComponent({
       resetPassword,
       onSearch,
       clear,
+      getCharacterInfoById,
+      edit,
+      submit,
+      close,
     };
   },
 });

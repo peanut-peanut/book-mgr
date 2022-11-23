@@ -1,5 +1,7 @@
+import { getToken } from '@/helpers/token';
 import axios from 'axios';
 
+axios.defaults.headers.Authorization = `Bearer ${getToken()}`;
 // 添加书籍
 export const add = (form) => axios.post('http://localhost:3000/book/add', form);
 // 获取书籍列表

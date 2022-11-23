@@ -1,11 +1,15 @@
-import { defineComponent, reactive, ref } from 'vue';
+import {
+  defineComponent, reactive, ref, onMounted,
+} from 'vue';
 import { user } from '@/service';
 import { deepClone, result } from '@/helpers/utils';
 import { message } from 'ant-design-vue';
+import store from '@/store';
 
 const defaultForm = {
   account: '',
   password: '',
+  character: '',
 };
 
 export default defineComponent({
@@ -13,6 +17,8 @@ export default defineComponent({
     show: Boolean,
   },
   setup(props, context) {
+    const { characterInfo } = store.state;
+    defaultForm.character = characterInfo[1]._id;
     // 页面表单绑定
     const addForm = reactive(deepClone(defaultForm));
     // 弹框确定方法
@@ -35,9 +41,13 @@ export default defineComponent({
       // 将show的值更新成false
       context.emit('update:show', false);
     };
+
+    onMounted(() => {
+    });
     return {
       props,
       addForm,
+      characterInfo,
       submit,
       close,
     };

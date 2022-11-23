@@ -3,6 +3,10 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue'
 import { auth } from '@/service';
 import { message } from 'ant-design-vue';
 import { result } from '@/helpers/utils';
+import { useRouter } from 'vue-router';
+import store from '@/store';
+import { getCharacterInfoById } from '@/helpers/character';
+import { setToken } from '@/helpers/token';
 
 export default defineComponent({
   components: {
@@ -11,6 +15,8 @@ export default defineComponent({
     MailOutlined,
   },
   setup() {
+    // 注册路由
+    const router = useRouter();
     // 注册表单
     const regForm = reactive({
       account: '',
@@ -44,8 +50,12 @@ export default defineComponent({
       }
       const res = await auth.login(loginForm.account, loginForm.password);
       result(res)
-        .success((data) => {
-          message.success(data.msg);
+        .success(({ msg, data: { user, token } }) => {
+          message.success(msg);
+          store.commit('setUserInfo', user);
+          store.commit('setUserCharacter', getCharacterInfoById(user.character));
+          setToken(token);
+          router.replace('/books');
         });
     };
     return {

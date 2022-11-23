@@ -4,9 +4,9 @@
 			<space-between>
 				<h2>{{detailMsg.name}}</h2>
 				<div>
-					<a-button size="middle" type="primary" @click="showUpdateModal = true">编辑</a-button>
+					<a-button size="middle" type="primary" @click="showUpdateModal = true" v-only-admin>编辑</a-button>
 					&nbsp;
-					<a-button size="middle" type="danger" @click="remove">删除</a-button>
+					<a-button size="middle" type="danger" @click="remove" v-only-admin>删除</a-button>
 				</div>
 			</space-between>
 			<a-divider />

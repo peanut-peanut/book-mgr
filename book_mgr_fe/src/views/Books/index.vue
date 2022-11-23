@@ -7,13 +7,13 @@
 				<div class="search">
 					<a-input-search
 						v-model:value="keyword"
-						placeholder="输入书名关键词"
+						placeholder="输入书名搜索"
 						enter-button="搜索"
 						@search="onSearch"
 						/>
 						<a v-show="status" href="javascript:;" @click="clear">清空</a>
 				</div>
-				<a-button @click="show = true">添加一条</a-button>
+				<a-button @click="show = true" v-only-admin>添加图书</a-button>
 			</space-between>
 			<a-divider />
 			<a-table
@@ -23,17 +23,17 @@
 			:pagination="false">
 				<template #bodyCell="{column, record}">
 					<template v-if="column.dataIndex === 'count'">
-						<a href="javascript:;" @click="updateCount(1,record)">入库</a>
+						<a href="javascript:;" @click="updateCount(1,record)" v-only-admin>入库</a>
 						{{record.count}}
-						<a href="javascript:;" @click="updateCount(2,record)">出库</a>
+						<a href="javascript:;" @click="updateCount(2,record)" v-only-admin>出库</a>
 					</template>
 					<template v-if="column.dataIndex === 'publishDate'">
 						{{formatTimeDate(record.publishDate)}}
 					</template>
 					<template v-if="column.dataIndex === 'option'">
 						<a href="javascript:;" @click="detail(record)">详情&emsp;</a>
-						<a href="javascript:;" @click="update(record)">编辑&emsp;</a>
-						<a href="javascript:;" @click="remove(record)">删除</a>
+						<a href="javascript:;" v-only-admin @click="update(record)">编辑&emsp;</a>
+						<a href="javascript:;" v-only-admin @click="remove(record)">删除</a>
 					</template>
 				</template>
 			</a-table>

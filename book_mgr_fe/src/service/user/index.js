@@ -14,3 +14,5 @@ export const add = (form) => axios.post('http://localhost:3000/user/add', form);
 export const remove = (id) => axios.delete(`http://localhost:3000/user/delete/${id}`);
 // 重置密码
 export const resetPassword = (id) => axios.post('http://localhost:3000/user/reset/password', id);
+// 获取用户信息
+export const info = () => axios.get('http://localhost:3000/user/info');
