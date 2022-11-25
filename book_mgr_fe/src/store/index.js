@@ -12,12 +12,15 @@ export default createStore({
   getters: {
   },
   mutations: {
+    // 所有角色列表信息用于select-option
     setCharacterInfo(state, characterInfo) {
       state.characterInfo = characterInfo;
     },
+    // 当前用户的所有信息
     setUserInfo(state, userInfo) {
       state.userInfo = userInfo;
     },
+    // 当前用户的角色信息
     setUserCharacter(state, userCharacter) {
       state.userCharacter = userCharacter;
     },

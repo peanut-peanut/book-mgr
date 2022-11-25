@@ -153,6 +153,7 @@ router.get('/info', async (ctx) => {
 		code: 1,
 		msg: '获取用户信息成功',
 		data: await verify(getToken(ctx)),
+		// data: ctx,
 	}
 })
 module.exports = router;

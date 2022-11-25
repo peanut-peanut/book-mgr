@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import { character } from '@/service';
 import store from '@/store';
 
 const routes = [
@@ -28,6 +27,11 @@ const routes = [
         name: 'User',
         component: () => import(/* webpackChunkName: "auth" */ '../views/User/index.vue'),
       },
+      {
+        path: 'log',
+        name: 'Log',
+        component: () => import(/* webpackChunkName: "auth" */ '../views/Log/index.vue'),
+      },
     ],
   },
 ];
@@ -44,10 +48,11 @@ next：路由的控制参数，next(true)和next(false)
 */
 router.beforeEach(async (to, from, next) => {
   if (!store.state.characterInfo.length) {
-    store.dispatch('getCharacterInfo');
-    window.store = store;
+    await store.dispatch('getCharacterInfo');
   }
-  store.dispatch('getUserInfo');
+  if (!store.state.userInfo.account) {
+    await store.dispatch('getUserInfo');
+  }
   next();
 });
 

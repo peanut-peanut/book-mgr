@@ -3,8 +3,9 @@ require('./Schemas/User');
 require('./Schemas/InviteCode');
 require('./Schemas/Book');
 require('./Schemas/InventoryLog');
-require('./Schemas/character');
-
+require('./Schemas/Character');
+require('./Schemas/Log');
+require('./Schemas/LogResponse');
 
 const connect = () => { 
   return new Promise((resolve) => {
