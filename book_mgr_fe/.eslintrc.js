@@ -22,6 +22,7 @@ module.exports = {
     'import/no-cycle': 'off',
     'import/no-import-module-exports': 'off',
     'new-cap': 'off',
+    'no-mixed-spaces-and-tabs': 'off',
     'no-param-reassign': 0,
   },
 };

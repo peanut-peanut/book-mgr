@@ -10,14 +10,18 @@
   >
     <a-sub-menu v-if="item.children">
       <template #title>{{item.title}}</template>
-
+			<a-menu-item
+			v-for="child in item.children"
+			:key="child.url"
+			@click="to(child.url)"
+			>{{child.title}}
+			</a-menu-item>
 		</a-sub-menu>
-			<a-menu-item v-else
-			:key="item.url"
-			@click="to(item.url)"
-			>{{item.title}}</a-menu-item>
-   
-
+		<a-menu-item v-else
+		:key="item.url"
+		@click="to(item.url)"
+		>{{item.title}}
+		</a-menu-item>
   </a-menu>
 </template>
 

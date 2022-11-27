@@ -1,7 +1,7 @@
 import { defineComponent, reactive } from 'vue';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons-vue';
-import { auth } from '@/service';
-import { message } from 'ant-design-vue';
+import { auth, forgetPassword } from '@/service';
+import { message, Modal } from 'ant-design-vue';
 import { result } from '@/helpers/utils';
 import { useRouter } from 'vue-router';
 import store from '@/store';
@@ -58,11 +58,34 @@ export default defineComponent({
           router.replace('/books');
         });
     };
+
+    const forgetPwd = async () => {
+      Modal.confirm({
+        title: '请输入申请重置密码的账户',
+        style: 'top: 300px',
+        okText: '确认',
+        cancelText: '取消',
+        content: (
+      		<div>
+      			<Input class="_forget_account" />
+      		</div>
+        ),
+        onOk: async () => {
+          const el = document.querySelector('._forget_account');
+          const res = await forgetPassword.add(el.value);
+          result(res)
+            .success(({ msg }) => {
+              message.success(`${msg}，请等待管理员处理`);
+            });
+        },
+      });
+    };
     return {
       regForm,
       loginForm,
       register,
       login,
+      forgetPwd,
     };
   },
 });

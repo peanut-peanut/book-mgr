@@ -35,6 +35,10 @@
 		margin: 0 auto;
 		.item {
 			margin-bottom: 16px;
+			a {
+				position: relative;
+				z-index: 999;
+			}
 			button {
 				width: 100%;
 			}
